@@ -8059,4 +8059,5 @@ var bitcoinAmount = bitcoinData.reduce((acc) => acc + 1, 0);
 var totalDays = bitcoinData.filter((obj) => obj["price(USD)"] > 100.00).reduce((acc) => acc + 1, 0);
 
 // 	 And finally, let’s find the average bitcoin transaction fees between 2013 and 2015. Be sure to floor this value.
-var avgFee = bitCoinData.reduce((acc, curr) => acc + curr['fees'], 0)/(bitcoinData.reduce((acc) => acc + 1, 0));
+var avgFee = Math.floor(bitcoinData.reduce((acc, curr) => acc + curr['fees'], 0)/bitcoinData.length);
+
