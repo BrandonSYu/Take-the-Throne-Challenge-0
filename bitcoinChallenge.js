@@ -8031,10 +8031,32 @@ var bitcoinData = [
 }
 ];
 
+//What is the data type of bitcoinData? Let’s say we just want to look at bitcoin information on May 1st, 2013. How can we do that?
 function dateFunc(){
     $(document).ready(function () {
     var dateInput = document.getElementById('dateSearch').value;
-    var data = bitcoinData.filter((time)=> time.date === dateInput );
+    var data = bitcoinData.filter((obj)=> obj.date === dateInput );
     $("p1").html(JSON.stringify(data));
     });
 }
+
+// Let’s say we want to create an array containing only the date and price of each day. Use the built-in map method to create an array containing that information.
+var bitCoinArr = bitcoinData.map(x => [x["date"], x["price(USD)"]]);
+
+// Let’s create an array that only includes days when exchange volume was not 0. Which method should we use?
+
+//function exchangeVol(){
+    //$(document).ready(function () {
+        //var days = bitcoinData.filter((obj) => obj["exchangeVolume(USD)"] !== 0).map(x => x["date"]);
+        //alert(days);
+    //});
+//}
+
+// Everyday, new Bitcoins are generated. If we want to find out how many were generated all together during the time that’s provided in the dataset, can you figure out how to calculate it using reduce?
+var bitcoinAmount = bitcoinData.reduce((acc) => acc + 1, 0);
+
+// 	Bitcoin price fluctuates a lot. Let’s combine some array methods to find the total number of days when bitcoin price was over $100!
+var totalDays = bitcoinData.filter((obj) => obj["price(USD)"] > 100.00).reduce((acc) => acc + 1, 0);
+
+// 	 And finally, let’s find the average bitcoin transaction fees between 2013 and 2015. Be sure to floor this value.
+var avgFee = bitCoinData.reduce((acc, curr) => acc + curr['fees'], 0)/(bitcoinData.reduce((acc) => acc + 1, 0));
