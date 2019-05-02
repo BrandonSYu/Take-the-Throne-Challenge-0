@@ -8044,19 +8044,18 @@ function dateFunc(){
 var bitCoinArr = bitcoinData.map(x => [x["date"], x["price(USD)"]]);
 
 // Let’s create an array that only includes days when exchange volume was not 0. Which method should we use?
-
-//function exchangeVol(){
-    //$(document).ready(function () {
-        //var days = bitcoinData.filter((obj) => obj["exchangeVolume(USD)"] !== 0).map(x => x["date"]);
-        //alert(days);
-    //});
-//}
+var days = bitcoinData.filter((obj) => obj["exchangeVolume(USD)"] !== 0).map(x => x["date"]);
 
 // Everyday, new Bitcoins are generated. If we want to find out how many were generated all together during the time that’s provided in the dataset, can you figure out how to calculate it using reduce?
 var bitcoinAmount = bitcoinData.reduce((acc) => acc + 1, 0);
 
 // 	Bitcoin price fluctuates a lot. Let’s combine some array methods to find the total number of days when bitcoin price was over $100!
-var totalDays = bitcoinData.filter((obj) => obj["price(USD)"] > 100.00).reduce((acc) => acc + 1, 0);
+function overPrice(){
+    var priceInput = document.getElementById('overpriceSearch').value;
+    var price = parseFloat(priceInput);
+    var totalDays = bitcoinData.filter((obj) => obj["price(USD)"] > price).reduce((acc) => acc + 1, 0);
+    $("p2").html(JSON.stringify(totalDays));
+}
 
 // 	 And finally, let’s find the average bitcoin transaction fees between 2013 and 2015. Be sure to floor this value.
 var avgFee = Math.floor(bitcoinData.reduce((acc, curr) => acc + curr['fees'], 0)/bitcoinData.length);
