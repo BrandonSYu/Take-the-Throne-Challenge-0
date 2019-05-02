@@ -8036,7 +8036,7 @@ function dateFunc(){
     $(document).ready(function () {
     var dateInput = document.getElementById('dateSearch').value;
     var data = bitcoinData.filter((obj)=> obj.date === dateInput );
-    $("p1").html(JSON.stringify(data));
+    $("p1").html(JSON.stringify(data).replace(/\,/g, "\n"));
     });
 }
 
