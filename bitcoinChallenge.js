@@ -8029,3 +8029,12 @@ var bitcoinData = [
   "fees": 16.08550077,
   "activeAddresses": null
 }
+];
+
+function dateFunc(){
+    $(document).ready(function () {
+    var dateInput = document.getElementById('dateSearch').value;
+    var data = bitcoinData.filter((time)=> time.date === dateInput );
+    $("p1").html(JSON.stringify(data));
+    });
+}

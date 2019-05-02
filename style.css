@@ -1,0 +1,28 @@
+.wrapper {
+    border:1px solid #000;
+    display:inline-block;
+}
+
+input,
+button {
+    background-color:transparent;
+    border:0;
+}
+
+.dateResult {
+  content: "";
+}
+
+.p1{
+    width : 500px;
+    display : flex;
+    justify-content : center;
+    flex-direction : row;
+}
+
+.result{
+    width : 500px;
+    display : flex;
+    flex-direction : row;
+    flex-wrap : wrap;
+}
