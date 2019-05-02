@@ -8039,6 +8039,7 @@ function dateFunc(){
     $("p1").html(JSON.stringify(data).replace(/\,/g, "\n"));
     });
 }
+//var data = bitcoinData.filter((obj)=> obj.date === dateInput );
 
 // Let’s say we want to create an array containing only the date and price of each day. Use the built-in map method to create an array containing that information.
 var bitCoinArr = bitcoinData.map(x => [x["date"], x["price(USD)"]]);
@@ -8056,7 +8057,20 @@ function overPrice(){
     var totalDays = bitcoinData.filter((obj) => obj["price(USD)"] > price).reduce((acc) => acc + 1, 0);
     $("p2").html(JSON.stringify(totalDays));
 }
-
+//var totalDays = bitcoinData.filter((obj) => obj["price(USD)"] > 100).reduce((acc) => acc + 1, 0);
 // 	 And finally, let’s find the average bitcoin transaction fees between 2013 and 2015. Be sure to floor this value.
-var avgFee = Math.floor(bitcoinData.reduce((acc, curr) => acc + curr['fees'], 0)/bitcoinData.length);
+function avgYears(){
+    var year1Input = document.getElementById('year1').value;
+    var year2Input = document.getElementById('year2').value;
+    var filteredData = bitcoinData.filter((x) => (year2Input - year1Input === 1) ? x["date"].includes(year1Input) || x["date"].includes(year2Input) 
+    : x["date"].includes(year1Input) || x["date"].includes((parseInt(year1Input)+1).toString()) ||x["date"].includes(year2Input));
+
+    //in progress
+    //var filteredData = bitcoinData.filter((x) => Array.from({length: parseInt(year2Input)+1 - parseInt(year1Input)}, (v, i) => i).map(x => x + parseInt(year1Input)).some(function(ele){(x["date"].includes(ele.toString())) ? true : false}));
+
+    var avgFee = Math.floor(filteredData.reduce((acc, curr) => acc + curr['fees'], 0)/filteredData.length);
+    $("p3").html(JSON.stringify(avgFee));
+}
+
+//var avgFee = Math.floor(bitcoinData.reduce((acc, curr) => acc + curr['fees'], 0)/bitcoinData.length);
 
